@@ -39,7 +39,7 @@
 \renewcommand{\bfseries}{\color{gray}} % Make \textbf produce coloured text instead
 
 \pagestyle{empty} % Disable headers and footers
-
+ 
 \setlength{\parindent}{0pt} % Disable paragraph indentation
 
 %----------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@
 			\ifthenelse{\equal{\cvsite}{}}{}{\textsc{\Large\icon{\Mundus}} & \cvsite\\}
 			\ifthenelse{\equal{\cvmail}{}}{}{\textsc{\large\icon{@}} & \href{mailto:\cvmail}{\cvmail}}
 		\end{tabular}
-
+                
 		%------------------------------------------------
 		
 		\ifthenelse{\equal{\aboutme}{}}{}{
@@ -216,15 +216,12 @@
 		{\Large\color{black!80}\cvjobtitle}
 
 		%------------------------------------------------
-
-		\renewcommand{\arraystretch}{1.6}
+		
+	        \renewcommand{\arraystretch}{1.6}
 		\begin{tabular}{p{0.5cm} @{\hskip 0.5cm}p{5cm}}
-			\ifthenelse{\equal{\cvdate}{}}{}{\textsc{\Large\icon{\Info}} & \cvdate\\}
-			\ifthenelse{\equal{\cvaddress}{}}{}{\textsc{\Large\icon{\Letter}} & \cvaddress\\}
-			\ifthenelse{\equal{\cvnumberphone}{}}{}{\textsc{\Large\icon{\Telefon}} & \cvnumberphone\\}
-			\ifthenelse{\equal{\cvsite}{}}{}{\textsc{\Large\icon{\Mundus}} & \cvsite\\}
 			\ifthenelse{\equal{\cvmail}{}}{}{\textsc{\large\icon{@}} & \href{mailto:\cvmail}{\cvmail}}
 		\end{tabular}
+
 
 		%------------------------------------------------
 		
@@ -330,9 +327,22 @@
 
 \newcommand{\twentyitemshort}[2]{%
 	#1&\parbox[t]{0.83\textwidth}{%
-		\textbf{#2}%
-	}\\
+		#2\vspace{\parsep}%
+	} \\
 }
+
+% New environment for the small list
+\newenvironment{twentysingle}{%
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+}{%
+	\end{tabular*}
+}
+
+\newcommand{\twentyitemsingle}[1]{%
+	#1&\parbox[t]{0.83\textwidth}{%
+	} \\
+}
+
 
 %----------------------------------------------------------------------------------------
 %	 MARGINS AND LINKS
