@@ -73,6 +73,7 @@
 \newcommand{\cvsite}[1]{\renewcommand{\cvsite}{#1}}
 \newcommand{\aboutme}[1]{\renewcommand{\aboutme}{#1}}
 \newcommand{\whyidoit}[1]{\renewcommand{\whyidoit}{#1}}
+\newcommand{\mygoals}[1]{\renewcommand{\mygoals}{#1}}
 \newcommand{\profilepic}[1]{\renewcommand{\profilepic}{#1}}
 \newcommand{\cvname}[1]{\renewcommand{\cvname}{#1}}
 \newcommand{\cvjobtitle}[1]{\renewcommand{\cvjobtitle}{#1}}
@@ -96,6 +97,19 @@
 % Command for printing favorite things progress bars
 \newcommand\favthings[1]{ 
 	\renewcommand{\favthings}{
+		\begin{tikzpicture}
+			\foreach [count=\i] \x/\y in {#1}{
+				\draw[fill=maingray,maingray] (0,\i) rectangle (6,\i+0.4);
+				\draw[fill=white,mainblue](0,\i) rectangle (\y,\i+0.4);
+				\node [above right] at (0,\i+0.4) {\x};
+			}
+		\end{tikzpicture}
+	}
+}
+
+% Command for printing favorite things progress bars
+\newcommand\investment[1]{ 
+	\renewcommand{\investment}{
 		\begin{tikzpicture}
 			\foreach [count=\i] \x/\y in {#1}{
 				\draw[fill=maingray,maingray] (0,\i) rectangle (6,\i+0.4);
@@ -184,7 +198,7 @@
 }
 
 %----------------------------------------------------------------------------------------
-%	 SIDEBAR LAYOUT; second page
+%	 SIDEBAR LAYOUT; second
 %----------------------------------------------------------------------------------------
 
 \newcommand{\makeprofileSecond}{
@@ -216,11 +230,66 @@
 		{\Large\color{black!80}\cvjobtitle}
 
 		%------------------------------------------------
+	
+
+		%------------------------------------------------
 		
-	        \renewcommand{\arraystretch}{1.6}
-		\begin{tabular}{p{0.5cm} @{\hskip 0.5cm}p{5cm}}
-                  \ifthenelse{\equal{\cvmail}{}}{}{\textsc{\large\icon{@}} & \cvmail\\}
-		\end{tabular}
+		\ifthenelse{\equal{\mygoals}{}}{}{
+			\profilesection{Goals}
+			\begin{flushleft} 
+			  \justifying \mygoals
+			\end{flushleft}
+		}
+
+		%------------------------------------------------
+
+		\profilesection{Investment Areas}
+
+		\investment
+		\skillstext
+		\scriptsize
+		(*)[Scale ranges from 0 (unfavorable) to 6 (favorable).]
+			
+		%------------------------------------------------
+			
+	\end{textblock}
+}
+
+
+%----------------------------------------------------------------------------------------
+%	 SIDEBAR LAYOUT; off page
+%----------------------------------------------------------------------------------------
+
+\newcommand{\makeprofileThird}{
+	\begin{tikzpicture}[remember picture,overlay]
+   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
+	\end{tikzpicture}
+
+	%------------------------------------------------
+
+	\begin{textblock}{6}(0.5, 0.2)
+			
+		%------------------------------------------------
+		
+		\ifthenelse{\equal{\profilepic}{}}{}{
+			\begin{center}
+				\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+					\clip (600/2, 567/2) circle (567/2);
+					\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{\profilepic}};
+				\end{tikzpicture}
+			\end{center}
+		}
+
+		%------------------------------------------------
+
+		{\Huge\color{mainblue}\cvname}
+
+		%------------------------------------------------
+
+		{\Large\color{black!80}\cvjobtitle}
+
+		%------------------------------------------------
+	
 
 
 		%------------------------------------------------
