@@ -46,12 +46,12 @@
 %	 SIDEBAR DEFINITIONS
 %----------------------------------------------------------------------------------------
 
-\setlength{\TPHorizModule}{1cm} % Left margin
+\setlength{\TPHorizModule}{1.0cm} % Left margin
 \setlength{\TPVertModule}{1cm} % Top margin
 
 \newlength\imagewidth
 \newlength\imagescale
-\pgfmathsetlength{\imagewidth}{5cm}
+\pgfmathsetlength{\imagewidth}{6cm}
 \pgfmathsetlength{\imagescale}{\imagewidth/600}
 
 \newlength{\TotalSectionLength} % Define a new length to hold the remaining line width after the section title is printed
@@ -137,7 +137,7 @@
 
 \newcommand{\makeprofile}{
 	\begin{tikzpicture}[remember picture,overlay]
-   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
+   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9.5cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
 	\end{tikzpicture}
 
 	%------------------------------------------------
@@ -170,8 +170,8 @@
 			%\ifthenelse{\equal{\cvdate}{}}{}{\textsc{\Large\icon{\Info}} & \cvdate\\}
 			\ifthenelse{\equal{\cvaddress}{}}{}{\textsc{\Large\icon{\Letter}} & \cvaddress\\}
 			%\ifthenelse{\equal{\cvnumberphone}{}}{}{\textsc{\Large\icon{\Telefon}} & \cvnumberphone\\}
-			\ifthenelse{\equal{\cvsite}{}}{}{\textsc{\Large\icon{\Mundus}} & \cvsite\\}
 			\ifthenelse{\equal{\cvmail}{}}{}{\textsc{\large\icon{@}} & \cvmail\\}
+			\ifthenelse{\equal{\cvsite}{}}{}{\textsc{\Large\icon{\Mundus}} & \cvsite\\}
 		\end{tabular}
                 
 		%------------------------------------------------
@@ -203,7 +203,7 @@
 
 \newcommand{\makeprofileSecond}{
 	\begin{tikzpicture}[remember picture,overlay]
-   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
+   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9.5cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
 	\end{tikzpicture}
 
 	%------------------------------------------------
@@ -262,7 +262,7 @@
 
 \newcommand{\makeprofileThird}{
 	\begin{tikzpicture}[remember picture,overlay]
-   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
+   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9.5cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
 	\end{tikzpicture}
 
 	%------------------------------------------------
