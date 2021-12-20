@@ -74,6 +74,7 @@
 \newcommand{\aboutme}[1]{\renewcommand{\aboutme}{#1}}
 \newcommand{\whyidoit}[1]{\renewcommand{\whyidoit}{#1}}
 \newcommand{\mygoals}[1]{\renewcommand{\mygoals}{#1}}
+\newcommand{\whoami}[1]{\renewcommand{\whoami}{#1}}
 \newcommand{\profilepic}[1]{\renewcommand{\profilepic}{#1}}
 \newcommand{\cvname}[1]{\renewcommand{\cvname}{#1}}
 \newcommand{\cvjobtitle}[1]{\renewcommand{\cvjobtitle}{#1}}
@@ -190,7 +191,7 @@
 		\skills
 		\skillstext
 		\scriptsize
-		(*)[Scale ranges from 0 (Fundamental Awareness) to 6 (Expert).]
+		[Scale ranges from 0 (Fundamental Awareness) to 6 (Expert).]
 			
 		%------------------------------------------------
 			
@@ -248,7 +249,7 @@
 		\investment
 		\skillstext
 		\scriptsize
-		(*)[Scale ranges from 0 (unfavorable) to 6 (favorable).]
+		[Scale ranges from 0 (low-interest) to 6 (high-interest).]
 			
 		%------------------------------------------------
 			
@@ -308,9 +309,61 @@
 		\favthings
 		\skillstext
 		\scriptsize
-		(*)[Scale ranges from 0 (unfavorable) to 6 (favorable).]
+		[Scale ranges from 0 (unfavorable) to 6 (favorable).]
 			
 		%------------------------------------------------
+			
+	\end{textblock}
+}
+
+\newcommand{\makeprofileReduced}{
+	\begin{tikzpicture}[remember picture,overlay]
+   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=2.0cm, minimum height=\paperheight+1cm] (box) at (-7.0cm,1.5cm){};
+	\end{tikzpicture}
+
+	%------------------------------------------------
+
+	\begin{textblock}{6}(0.5, 0.2)
+			
+		%------------------------------------------------
+		
+
+
+	\end{textblock}
+}
+
+\newcommand{\makeprofileGeneral}{
+	\begin{tikzpicture}[remember picture,overlay]
+   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9.5cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
+	\end{tikzpicture}
+
+	%------------------------------------------------
+
+	\begin{textblock}{6}(0.5, 0.2)
+			
+		%------------------------------------------------
+		
+		\ifthenelse{\equal{\profilepic}{}}{}{
+			\begin{center}
+				\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+					\clip (600/2, 567/2) circle (567/2);
+					\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{\profilepic}};
+				\end{tikzpicture}
+			\end{center}
+		}
+
+		%------------------------------------------------
+
+		{\Huge\color{mainblue}\cvname}
+
+		%------------------------------------------------
+
+		{\Large\color{black!80}\cvjobtitle}
+
+		%------------------------------------------------
+	
+
+
 			
 	\end{textblock}
 }
@@ -338,6 +391,18 @@
 			maingray\or%
 			mainblue\or%
  			maingray\or%
+			mainblue\or%
+ 			maingray\or%
+			mainblue\or%
+ 			maingray\or%
+			mainblue\or%
+ 			maingray\or%
+			mainblue\or%
+ 			maingray\or%
+			mainblue\or%
+ 			maingray\or%
+			mainblue\or%
+ 			maingray\or%
 			mainblue\else%
 			maingray\fi%
 		}%
@@ -352,11 +417,29 @@
 	}
 }
 
+\newcommand{\sectionLeft}[1]{
+  \begin{flushleft}
+	{%
+		\color{gray}%
+		\Large\sectioncolor{#1}%
+	}
+  \end{flushleft}
+}
+
 \renewcommand{\subsection}[1]{
 	\par\vspace{.5\parskip}{%
 		\large\color{gray} #1%
 	}
 	\par\vspace{.25\parskip}%
+}
+
+
+\renewcommand{\subsection}[1]{
+		\begin{flushleft}
+
+		\color{gray}%
+		\Large\sectioncolor{#1}%
+		\end{flushleft}
 }
 
 %----------------------------------------------------------------------------------------
