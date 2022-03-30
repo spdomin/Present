@@ -46,12 +46,12 @@
 %	 SIDEBAR DEFINITIONS
 %----------------------------------------------------------------------------------------
 
-\setlength{\TPHorizModule}{1cm} % Left margin
+\setlength{\TPHorizModule}{1.0cm} % Left margin
 \setlength{\TPVertModule}{1cm} % Top margin
 
 \newlength\imagewidth
 \newlength\imagescale
-\pgfmathsetlength{\imagewidth}{5cm}
+\pgfmathsetlength{\imagewidth}{6cm}
 \pgfmathsetlength{\imagescale}{\imagewidth/600}
 
 \newlength{\TotalSectionLength} % Define a new length to hold the remaining line width after the section title is printed
@@ -66,13 +66,15 @@
 }
 
 % Define custom commands for CV info
-\newcommand{\cvdate}[1]{\renewcommand{\cvdate}{#1}}
+%\newcommand{\}[1]{\renewcommand{\cvdate}{#1}}
 \newcommand{\cvmail}[1]{\renewcommand{\cvmail}{#1}}
-\newcommand{\cvnumberphone}[1]{\renewcommand{\cvnumberphone}{#1}}
+%\newcommand{\cvnumberphone}[1]{\renewcommand{\cvnumberphone}{#1}}
 \newcommand{\cvaddress}[1]{\renewcommand{\cvaddress}{#1}}
 \newcommand{\cvsite}[1]{\renewcommand{\cvsite}{#1}}
 \newcommand{\aboutme}[1]{\renewcommand{\aboutme}{#1}}
 \newcommand{\whyidoit}[1]{\renewcommand{\whyidoit}{#1}}
+\newcommand{\mygoals}[1]{\renewcommand{\mygoals}{#1}}
+\newcommand{\whoami}[1]{\renewcommand{\whoami}{#1}}
 \newcommand{\profilepic}[1]{\renewcommand{\profilepic}{#1}}
 \newcommand{\cvname}[1]{\renewcommand{\cvname}{#1}}
 \newcommand{\cvjobtitle}[1]{\renewcommand{\cvjobtitle}{#1}}
@@ -106,6 +108,19 @@
 	}
 }
 
+% Command for printing favorite things progress bars
+\newcommand\investment[1]{ 
+	\renewcommand{\investment}{
+		\begin{tikzpicture}
+			\foreach [count=\i] \x/\y in {#1}{
+				\draw[fill=maingray,maingray] (0,\i) rectangle (6,\i+0.4);
+				\draw[fill=white,mainblue](0,\i) rectangle (\y,\i+0.4);
+				\node [above right] at (0,\i+0.4) {\x};
+			}
+		\end{tikzpicture}
+	}
+}
+
 % Command for printing skills text
 \newcommand\skillstext[1]{ 
 	\renewcommand{\skillstext}{
@@ -123,7 +138,7 @@
 
 \newcommand{\makeprofile}{
 	\begin{tikzpicture}[remember picture,overlay]
-   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
+   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9.5cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
 	\end{tikzpicture}
 
 	%------------------------------------------------
@@ -153,11 +168,11 @@
 
 		\renewcommand{\arraystretch}{1.6}
 		\begin{tabular}{p{0.5cm} @{\hskip 0.5cm}p{5cm}}
-			\ifthenelse{\equal{\cvdate}{}}{}{\textsc{\Large\icon{\Info}} & \cvdate\\}
+			%\ifthenelse{\equal{\cvdate}{}}{}{\textsc{\Large\icon{\Info}} & \cvdate\\}
 			\ifthenelse{\equal{\cvaddress}{}}{}{\textsc{\Large\icon{\Letter}} & \cvaddress\\}
-			\ifthenelse{\equal{\cvnumberphone}{}}{}{\textsc{\Large\icon{\Telefon}} & \cvnumberphone\\}
+			%\ifthenelse{\equal{\cvnumberphone}{}}{}{\textsc{\Large\icon{\Telefon}} & \cvnumberphone\\}
+			\ifthenelse{\equal{\cvmail}{}}{}{\textsc{\large\icon{@}} & \cvmail\\}
 			\ifthenelse{\equal{\cvsite}{}}{}{\textsc{\Large\icon{\Mundus}} & \cvsite\\}
-			\ifthenelse{\equal{\cvmail}{}}{}{\textsc{\large\icon{@}} & \href{mailto:\cvmail}{\cvmail}}
 		\end{tabular}
                 
 		%------------------------------------------------
@@ -171,12 +186,12 @@
 
 		%------------------------------------------------
 
-		\profilesection{Skills}
+		\profilesection{Skills/Attributes}
 
 		\skills
 		\skillstext
 		\scriptsize
-		(*)[Scale ranges from 0 (Fundamental Awareness) to 6 (Expert).]
+		[Scale ranges from 0 (Fundamental Awareness) to 6 (Expert).]
 			
 		%------------------------------------------------
 			
@@ -184,12 +199,12 @@
 }
 
 %----------------------------------------------------------------------------------------
-%	 SIDEBAR LAYOUT; second page
+%	 SIDEBAR LAYOUT; second
 %----------------------------------------------------------------------------------------
 
 \newcommand{\makeprofileSecond}{
 	\begin{tikzpicture}[remember picture,overlay]
-   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
+   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9.5cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
 	\end{tikzpicture}
 
 	%------------------------------------------------
@@ -216,11 +231,66 @@
 		{\Large\color{black!80}\cvjobtitle}
 
 		%------------------------------------------------
+	
+
+		%------------------------------------------------
 		
-	        \renewcommand{\arraystretch}{1.6}
-		\begin{tabular}{p{0.5cm} @{\hskip 0.5cm}p{5cm}}
-			\ifthenelse{\equal{\cvmail}{}}{}{\textsc{\large\icon{@}} & \href{mailto:\cvmail}{\cvmail}}
-		\end{tabular}
+		\ifthenelse{\equal{\mygoals}{}}{}{
+			\profilesection{Goals}
+			\begin{flushleft} 
+			  \justifying \mygoals
+			\end{flushleft}
+		}
+
+		%------------------------------------------------
+
+		\profilesection{Investment Areas}
+
+		\investment
+		\skillstext
+		\scriptsize
+		[Scale ranges from 0 (low-interest) to 6 (high-interest).]
+			
+		%------------------------------------------------
+			
+	\end{textblock}
+}
+
+
+%----------------------------------------------------------------------------------------
+%	 SIDEBAR LAYOUT; off page
+%----------------------------------------------------------------------------------------
+
+\newcommand{\makeprofileThird}{
+	\begin{tikzpicture}[remember picture,overlay]
+   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9.5cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
+	\end{tikzpicture}
+
+	%------------------------------------------------
+
+	\begin{textblock}{6}(0.5, 0.2)
+			
+		%------------------------------------------------
+		
+		\ifthenelse{\equal{\profilepic}{}}{}{
+			\begin{center}
+				\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+					\clip (600/2, 567/2) circle (567/2);
+					\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{\profilepic}};
+				\end{tikzpicture}
+			\end{center}
+		}
+
+		%------------------------------------------------
+
+		{\Huge\color{mainblue}\cvname}
+
+		%------------------------------------------------
+
+		{\Large\color{black!80}\cvjobtitle}
+
+		%------------------------------------------------
+	
 
 
 		%------------------------------------------------
@@ -239,9 +309,61 @@
 		\favthings
 		\skillstext
 		\scriptsize
-		(*)[Scale ranges from 0 (not-so favorite) to 6 (no question).]
+		[Scale ranges from 0 (unfavorable) to 6 (favorable).]
 			
 		%------------------------------------------------
+			
+	\end{textblock}
+}
+
+\newcommand{\makeprofileReduced}{
+	\begin{tikzpicture}[remember picture,overlay]
+   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=2.0cm, minimum height=\paperheight+1cm] (box) at (-7.0cm,1.5cm){};
+	\end{tikzpicture}
+
+	%------------------------------------------------
+
+	\begin{textblock}{6}(0.5, 0.2)
+			
+		%------------------------------------------------
+		
+
+
+	\end{textblock}
+}
+
+\newcommand{\makeprofileGeneral}{
+	\begin{tikzpicture}[remember picture,overlay]
+   		\node [rectangle, fill=sidecolor, anchor=north, minimum width=9.5cm, minimum height=\paperheight+1cm] (box) at (-5cm,0.5cm){};
+	\end{tikzpicture}
+
+	%------------------------------------------------
+
+	\begin{textblock}{6}(0.5, 0.2)
+			
+		%------------------------------------------------
+		
+		\ifthenelse{\equal{\profilepic}{}}{}{
+			\begin{center}
+				\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+					\clip (600/2, 567/2) circle (567/2);
+					\node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{\profilepic}};
+				\end{tikzpicture}
+			\end{center}
+		}
+
+		%------------------------------------------------
+
+		{\Huge\color{mainblue}\cvname}
+
+		%------------------------------------------------
+
+		{\Large\color{black!80}\cvjobtitle}
+
+		%------------------------------------------------
+	
+
+
 			
 	\end{textblock}
 }
@@ -269,6 +391,18 @@
 			maingray\or%
 			mainblue\or%
  			maingray\or%
+			mainblue\or%
+ 			maingray\or%
+			mainblue\or%
+ 			maingray\or%
+			mainblue\or%
+ 			maingray\or%
+			mainblue\or%
+ 			maingray\or%
+			mainblue\or%
+ 			maingray\or%
+			mainblue\or%
+ 			maingray\or%
 			mainblue\else%
 			maingray\fi%
 		}%
@@ -283,11 +417,29 @@
 	}
 }
 
+\newcommand{\sectionLeft}[1]{
+  \begin{flushleft}
+	{%
+		\color{gray}%
+		\Large\sectioncolor{#1}%
+	}
+  \end{flushleft}
+}
+
 \renewcommand{\subsection}[1]{
 	\par\vspace{.5\parskip}{%
 		\large\color{gray} #1%
 	}
 	\par\vspace{.25\parskip}%
+}
+
+
+\renewcommand{\subsection}[1]{
+		\begin{flushleft}
+
+		\color{gray}%
+		\Large\sectioncolor{#1}%
+		\end{flushleft}
 }
 
 %----------------------------------------------------------------------------------------
